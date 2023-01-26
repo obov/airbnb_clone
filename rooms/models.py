@@ -28,6 +28,7 @@ class Room(NameDescriptionModel):
     owner = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
+        related_name="rooms",
     )
     is_pet_allowed = models.BooleanField(
         default=True,
@@ -38,13 +39,18 @@ class Room(NameDescriptionModel):
     )
     amenitis = models.ManyToManyField(
         "rooms.Amenity",
+        related_name="rooms",
     )
     category = models.ForeignKey(
         "categories.Category",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
+        related_name="rooms",
     )
+
+    def count_amenities(self):
+        return self.amenitis.count()
 
 
 class Amenity(NameDescriptionModel):

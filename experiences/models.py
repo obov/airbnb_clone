@@ -29,12 +29,14 @@ class Experience(NameDescriptionModel):
     )
     perks = models.ManyToManyField(
         "experiences.Perk",
+        related_name="categories",
     )
     category = models.ForeignKey(
         "categories.Category",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
+        related_name="categories",
     )
 
 

@@ -16,18 +16,21 @@ class ReservationRelater(CommonModel):
     user = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
+        related_name="reservations",
     )
     room = models.ForeignKey(
         "rooms.Room",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
+        related_name="reservations",
     )
     experience = models.ForeignKey(
         "experiences.Experience",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
+        related_name="reservations",
     )
 
     class Meta:
