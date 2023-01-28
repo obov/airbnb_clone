@@ -52,6 +52,16 @@ class Room(NameDescriptionModel):
     def count_amenities(self):
         return self.amenitis.count()
 
+    def rating(self):
+        count = self.reviews.count()
+        if count == 0:
+            return "No Reviews"
+        else:
+            total_raing = 0
+            for review in self.reviews.all().values("rating"):
+                total_raing += review["rating"]
+            return round(total_raing / count, 2)
+
 
 class Amenity(NameDescriptionModel):
 
